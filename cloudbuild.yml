@@ -20,5 +20,7 @@ steps:
       - 'us-central1'
       - '--platform'
       - 'managed'
+      - '--port'
+      - '80'
 options:
     logging: CLOUD_LOGGING_ONLY
