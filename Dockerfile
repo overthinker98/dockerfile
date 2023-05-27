@@ -1,15 +1,8 @@
-# Pull base image
-FROM debian:latest
+# Use the Nginx base image
+FROM nginx:latest
 
-# Dockerfile Maintainer
-MAINTAINER Jan Wagner "waja@cyconet.org"
+# Copy your resume file to the appropriate location
+COPY resume.html /usr/share/nginx/html
 
-# Install nginx and adjust nginx config to stay in foreground
-RUN apt-get update && apt-get install --no-install-recommends -y nginx; \
- echo "daemon off;" >> /etc/nginx/nginx.conf
-
-# Expose HTTP
+# Expose port 80
 EXPOSE 80
-
-# Start nginx
-CMD ["/usr/sbin/nginx"]
