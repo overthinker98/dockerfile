@@ -3,7 +3,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/nginx-image'
+      - 'gcr.io/$PROJECT_ID/resume-image'
       - '--build-arg'
       - 'CONTENT_PATH=/usr/share/nginx/html/index.html'
       - '--build-arg'
