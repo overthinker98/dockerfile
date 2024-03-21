@@ -3,7 +3,12 @@ FROM ubuntu:22.04  AS Builder
 
 # Install git, OpenJDK, and Maven
 RUN apt-get update && \
-    apt-get install -y git openjdk-17-jdk maven
+    apt-get install -y git wget openjdk-17-jdk
+RUN wget https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.tar.gz && \
+    tar xf apache-maven-3.6.3-bin.tar.gz -C /opt && \
+    ln -s /opt/apache-maven-3.6.3 /opt/maven && \
+    ln -s /opt/maven/bin/mvn /usr/local/bin/mvn
+
 
 # Set the working directory inside the container
 WORKDIR /var/www/html
