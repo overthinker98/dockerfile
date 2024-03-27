@@ -31,7 +31,7 @@ WORKDIR /app
 COPY --from=builder /var/www/html/spring-petclinic/target/*.jar /app/spring-petclinic.jar
 
 # Expose the port your application will run on
-EXPOSE 8080
+EXPOSE 9001
 
 # Define the command to run your application when the container starts
 CMD ["java", "-jar", "/app/spring-petclinic.jar"]
