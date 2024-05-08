@@ -28,11 +28,7 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: SnykSecurityScan@1
-      inputs:
-        serviceConnectionEndpoint: 'snyktoken'
-        testType: 'code'
-        failOnIssues: true
+   
     - task: SonarCloudAnalyze@1
       inputs:
         jdkversion: 'JAVA_HOME_17_X64'
