@@ -28,10 +28,6 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-   
-    - task: SonarCloudAnalyze@1
-      inputs:
-        jdkversion: 'JAVA_HOME_17_X64'
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
@@ -41,3 +37,19 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+  - job: Scan
+    displayName: Scan Docker image for vulnerabilities
+    pool:
+      vmImage: $(vmImageName)
+    dependsOn: Build
+    steps:
+    
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'snyktoken'
+        testType: 'container'
+        dockerImageName: '$(containerRegistry)/$(imageRepository):$(tag)'
+        dockerfilePath: '/'
+        monitorWhen: 'always'
+        failOnIssues: true
+    
